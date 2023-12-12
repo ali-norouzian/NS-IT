@@ -23,7 +23,7 @@ namespace Product.Infrastructure.Persistence.Seeds
 					ManufactureEmail = "tst0@tst0.tst0",
 					ManufacturePhone = "09000000000",
 					Name = "TstName0",
-					ProduceDate = DateTime.UtcNow,
+					ProduceDate = DateTime.UtcNow.AddMinutes(1),
 				},
 				new Domain.Entities.Product()
 				{
@@ -31,7 +31,7 @@ namespace Product.Infrastructure.Persistence.Seeds
 					ManufactureEmail = "tst1@tst1.tst1",
 					ManufacturePhone = "09111111111",
 					Name = "TstName1",
-					ProduceDate = DateTime.UtcNow,
+					ProduceDate = DateTime.UtcNow.AddMinutes(2),
 				},
 				new Domain.Entities.Product()
 				{
@@ -39,7 +39,7 @@ namespace Product.Infrastructure.Persistence.Seeds
 					ManufactureEmail = "tst2@tst2.tst2",
 					ManufacturePhone = "09222222222",
 					Name = "TstName2",
-					ProduceDate = DateTime.UtcNow,
+					ProduceDate = DateTime.UtcNow.AddMinutes(3),
 				},
 			};
 		}

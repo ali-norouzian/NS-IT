@@ -10,9 +10,24 @@ namespace Product.Infrastructure.Persistence.DbContexts
 
 		protected override void OnModelCreating(ModelBuilder modelBuilder)
 		{
+			#region Types
+
 			modelBuilder.Entity<Domain.Entities.Product>()
 				.Property(e => e.ProduceDate)
 				.HasColumnType("datetime"); // Set the column type to 'datetime'
+
+			#endregion
+
+			#region Uniques
+
+			modelBuilder.Entity<Domain.Entities.Product>()
+				.HasIndex(e => e.ManufactureEmail)
+				.IsUnique();
+			modelBuilder.Entity<Domain.Entities.Product>()
+				.HasIndex(e => e.ProduceDate)
+				.IsUnique();
+
+			#endregion
 		}
 
 		public DbSet<Domain.Entities.Product> Products { get; set; }
