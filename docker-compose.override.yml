@@ -1,0 +1,23 @@
+version: '3.4'
+
+services:
+  product.api:
+    container_name: product.api
+    depends_on:
+      - product.db
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+    ports:
+      - "8000:80"
+
+  product.db:
+    container_name: product.db
+    restart: always
+    ports:
+      - "1433:1433"
+    volumes:
+      - mssqls_data:/var/opt/mssql
+    environment:
+      - ACCEPT_EULA=Y
+      - MSSQL_SA_PASSWORD=admin@1234
+      - MSSQL_PID=Developer

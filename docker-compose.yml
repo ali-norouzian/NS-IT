@@ -1,0 +1,15 @@
+version: '3.4'
+
+services:
+  product.api:
+    image: ${DOCKER_REGISTRY-}product.api
+    build:
+      context: .
+      dockerfile: src/Services/Product/Product.API/Dockerfile
+
+  product.db:
+    image: mcr.microsoft.com/mssql/server:2022-CU10-ubuntu-22.04
+
+
+volumes:
+  mssqls_data:
