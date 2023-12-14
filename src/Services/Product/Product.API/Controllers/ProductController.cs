@@ -6,11 +6,8 @@ namespace Product.API.Controllers
 {
     public class ProductController : BaseController
     {
-        private readonly IMediator _mediator;
-
-        public ProductController(IMediator mediator)
+        public ProductController(IMediator mediator) : base(mediator)
         {
-            _mediator = mediator;
         }
 
         [HttpGet]
