@@ -3,6 +3,7 @@ using Product.Infrastructure.Persistence.DbContexts;
 using Microsoft.Extensions.Configuration;
 using Microsoft.EntityFrameworkCore;
 using Product.Application.Contracts.Persistence;
+using Product.Domain.Entities;
 using Product.Infrastructure.Repositories;
 
 namespace Product.Infrastructure
@@ -17,6 +18,20 @@ namespace Product.Infrastructure
 
             services.AddScoped(typeof(IAsyncRepository<>), typeof(RepositoryBase<>));
             services.AddScoped<IProductRepository, ProductRepository>();
+
+            #region Identity
+
+            services.AddIdentityCore<AppUser>(opt =>
+                {
+                    opt.Password.RequireNonAlphanumeric = false;
+                    opt.Password.RequireLowercase = false;
+                    opt.Password.RequireUppercase = false;
+                    opt.Password.RequiredUniqueChars = 0;
+                    opt.Password.RequireDigit = false;
+                })
+                .AddEntityFrameworkStores<MssqlsEfContext>();
+
+            #endregion
 
             return services;
         }

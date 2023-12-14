@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Product.Infrastructure.Persistence.DbContexts;
 
@@ -11,9 +12,11 @@ using Product.Infrastructure.Persistence.DbContexts;
 namespace Product.Infrastructure.Migrations
 {
     [DbContext(typeof(MssqlsEfContext))]
-    partial class MssqlsEfContextModelSnapshot : ModelSnapshot
+    [Migration("20231214182156_IdentityUserAdded")]
+    partial class IdentityUserAdded
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
