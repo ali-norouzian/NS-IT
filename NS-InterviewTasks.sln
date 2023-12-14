@@ -7,15 +7,15 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{979D523A-BBB
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Services", "Services", "{0A37D3B6-228F-42EC-A4FD-8305325CD647}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Product", "Product", "{5EFA0ACE-F494-4C82-9240-B1ABC11B8B01}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Products", "Products", "{5EFA0ACE-F494-4C82-9240-B1ABC11B8B01}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Product.API", "src\Services\Product\Product.API\Product.API.csproj", "{83B1AA92-EC84-4A55-8058-E4CE23E79309}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Product.API", "src\Services\Product\Product.API\Product.API.csproj", "{83B1AA92-EC84-4A55-8058-E4CE23E79309}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Product.Domain", "src\Services\Product\Product.Domain\Product.Domain.csproj", "{5D173055-639C-4859-BAC3-8BABEEE43F21}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Product.Domain", "src\Services\Product\Product.Domain\Product.Domain.csproj", "{5D173055-639C-4859-BAC3-8BABEEE43F21}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Product.Application", "src\Services\Product\Product.Application\Product.Application.csproj", "{5F39508C-6A30-41B5-8EF4-3EBBF36D091A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Product.Application", "src\Services\Product\Product.Application\Product.Application.csproj", "{5F39508C-6A30-41B5-8EF4-3EBBF36D091A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Product.Infrastructure", "src\Services\Product\Product.Infrastructure\Product.Infrastructure.csproj", "{8B5A2D0C-C744-4CC6-9BE1-44ECC4E03259}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Product.Infrastructure", "src\Services\Product\Product.Infrastructure\Product.Infrastructure.csproj", "{8B5A2D0C-C744-4CC6-9BE1-44ECC4E03259}"
 EndProject
 Project("{E53339B2-1760-4266-BCC7-CA923CBCF16C}") = "docker-compose", "docker-compose.dcproj", "{A2FA1036-D3A6-478A-8A1D-DFD4859A928E}"
 EndProject
