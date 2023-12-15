@@ -1,23 +1,13 @@
 ﻿using System.ComponentModel.DataAnnotations;
-using Product.Domain.Common;
 
-namespace Product.Domain.Entities
+namespace Product.Application.Features.Products.Queries.GetAllProducts
 {
-    public class Product : EntityBase
+    public class GetAllProductsDto
     {
-        [MaxLength(100)]
         public string Name { get; set; }
-
         public DateTime ProduceDate { get; set; }
-
-        [MaxLength(20)]
         public string ManufacturePhone { get; set; }
-
-        [MaxLength(100)]
         public string ManufactureEmail { get; set; }
-
         public bool IsAvailable { get; set; }
     }
 }
-
-// Product { Name , *ProduceDate , ManufacturePhone , *ManufactureEmail , IsAvailable }
