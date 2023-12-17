@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Product.Infrastructure.Persistence.DbContexts;
 
@@ -11,9 +12,11 @@ using Product.Infrastructure.Persistence.DbContexts;
 namespace Product.Infrastructure.Migrations
 {
     [DbContext(typeof(MssqlsEfContext))]
-    partial class MssqlsEfContextModelSnapshot : ModelSnapshot
+    [Migration("20231217051939_UserIdRename")]
+    partial class UserIdRename
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -225,9 +228,9 @@ namespace Product.Infrastructure.Migrations
 
             modelBuilder.Entity("Product.Domain.Entities.Product", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<long>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
+                        .HasColumnType("bigint");
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<long>("Id"));
 
@@ -265,7 +268,7 @@ namespace Product.Infrastructure.Migrations
                     b.HasIndex("ProduceDate")
                         .IsUnique();
 
-                    b.ToTable("Products", (string)null);
+                    b.ToTable("Products");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<int>", b =>

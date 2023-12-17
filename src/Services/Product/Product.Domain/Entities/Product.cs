@@ -17,6 +17,10 @@ namespace Product.Domain.Entities
         public string ManufactureEmail { get; set; }
 
         public bool IsAvailable { get; set; }
+
+
+        public int CreatorUserId { get; set; }
+        public AppUser CreatorUser { get; set; }
     }
 }
 

@@ -20,8 +20,8 @@ namespace Product.Application.Features.Services.Auth
         {
             var claims = new List<Claim>
             {
-                new (ClaimTypes.Name,user.UserName),
-                new (ClaimTypes.NameIdentifier,user.Id.ToString()),
+                new ("UserId",user.Id.ToString()),
+                new ("UserName",user.UserName),
             };
 
             var tokenKey = _configuration.GetValue<string>("TokenKey");

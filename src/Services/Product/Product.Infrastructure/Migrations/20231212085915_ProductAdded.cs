@@ -15,7 +15,7 @@ namespace Product.Infrastructure.Migrations
                 name: "Products",
                 columns: table => new
                 {
-                    Id = table.Column<long>(type: "bigint", nullable: false)
+                    Id = table.Column<long>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Name = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false),
                     ProduceDate = table.Column<DateTime>(type: "datetime", nullable: false),

@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Product.Infrastructure.Persistence.DbContexts;
 
@@ -11,9 +12,11 @@ using Product.Infrastructure.Persistence.DbContexts;
 namespace Product.Infrastructure.Migrations
 {
     [DbContext(typeof(MssqlsEfContext))]
-    partial class MssqlsEfContextModelSnapshot : ModelSnapshot
+    [Migration("20231215032145_UserRelationAddedToPtoduct")]
+    partial class UserRelationAddedToPtoduct
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -225,14 +228,11 @@ namespace Product.Infrastructure.Migrations
 
             modelBuilder.Entity("Product.Domain.Entities.Product", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<long>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
+                        .HasColumnType("bigint");
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<long>("Id"));
-
-                    b.Property<int>("CreatorUserId")
-                        .HasColumnType("int");
 
                     b.Property<bool>("IsAvailable")
                         .HasColumnType("bit");
@@ -255,9 +255,10 @@ namespace Product.Infrastructure.Migrations
                     b.Property<DateTime>("ProduceDate")
                         .HasColumnType("datetime2");
 
-                    b.HasKey("Id");
+                    b.Property<int>("UserId")
+                        .HasColumnType("int");
 
-                    b.HasIndex("CreatorUserId");
+                    b.HasKey("Id");
 
                     b.HasIndex("ManufactureEmail")
                         .IsUnique();
@@ -265,7 +266,9 @@ namespace Product.Infrastructure.Migrations
                     b.HasIndex("ProduceDate")
                         .IsUnique();
 
-                    b.ToTable("Products", (string)null);
+                    b.HasIndex("UserId");
+
+                    b.ToTable("Products");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<int>", b =>
@@ -321,13 +324,13 @@ namespace Product.Infrastructure.Migrations
 
             modelBuilder.Entity("Product.Domain.Entities.Product", b =>
                 {
-                    b.HasOne("Product.Domain.Entities.AppUser", "CreatorUser")
+                    b.HasOne("Product.Domain.Entities.AppUser", "User")
                         .WithMany("Products")
-                        .HasForeignKey("CreatorUserId")
+                        .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("CreatorUser");
+                    b.Navigation("User");
                 });
 
             modelBuilder.Entity("Product.Domain.Entities.AppUser", b =>

@@ -1,4 +1,6 @@
 ﻿using AutoMapper;
+using Product.Application.Features.Products.Commands.CreateProduct;
+using Product.Application.Features.Products.Commands.UpdateProduct;
 using Product.Application.Features.Products.Queries.GetAllProducts;
 
 namespace Product.Application.Mappings
@@ -8,6 +10,9 @@ namespace Product.Application.Mappings
         public MappingProfile()
         {
             CreateMap<Domain.Entities.Product, GetAllProductsDto>().ReverseMap();
+            CreateMap<Domain.Entities.Product, CreateProductCommand>().ReverseMap();
+            CreateMap<Domain.Entities.Product, UpdateProductCommand>().ReverseMap();
+
         }
     }
 }

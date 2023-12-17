@@ -2,7 +2,6 @@
 using Microsoft.Extensions.DependencyInjection;
 using System.Reflection;
 using System.Text;
-using FluentValidation;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.Extensions.Configuration;
@@ -15,7 +14,7 @@ namespace Product.Application
         public static IServiceCollection AddApplicationServices(this IServiceCollection services, IConfiguration configuration)
         {
             services.AddAutoMapper(Assembly.GetExecutingAssembly());
-            services.AddValidatorsFromAssembly(Assembly.GetExecutingAssembly());
+            //services.AddValidatorsFromAssembly(Assembly.GetExecutingAssembly());
             services.AddMediatR(Assembly.GetExecutingAssembly());
 
             #region Identity
