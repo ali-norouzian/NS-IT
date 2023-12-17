@@ -5,6 +5,6 @@ namespace Product.Domain.Common
     public abstract class EntityBase
     {
         [Key]
-        public long Id { get; protected set; }
+        public int Id { get; protected set; }
     }
 }

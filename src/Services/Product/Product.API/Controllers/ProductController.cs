@@ -23,9 +23,21 @@ namespace Product.API.Controllers
         [AllowAnonymous]
         [HttpGet]
         [ProducesResponseType(typeof(List<GetAllProductsDto>), (int)HttpStatusCode.OK)]
-        public async Task<ActionResult> Index()
+        public async Task<ActionResult> ListProduct()
         {
             var query = new GetAllProductsQuery();
+            var products = await _mediator.Send(query);
+
+            var response = new ResponseMessage(result: products);
+            return Ok(response);
+        }
+
+        [AllowAnonymous]
+        [HttpGet("{id}")]
+        [ProducesResponseType(typeof(List<GetAllProductsDto>), (int)HttpStatusCode.OK)]
+        public async Task<ActionResult> GetProduct(int id)
+        {
+            var query = new GetAllProductsQuery(id);
             var products = await _mediator.Send(query);
 
             var response = new ResponseMessage(result: products);

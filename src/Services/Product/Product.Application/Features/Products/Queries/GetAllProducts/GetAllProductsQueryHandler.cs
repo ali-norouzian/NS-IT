@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using MediatR;
 using Product.Application.Contracts.Persistence;
+using Product.Domain.Entities;
 
 namespace Product.Application.Features.Products.Queries.GetAllProducts
 {
@@ -17,7 +18,16 @@ namespace Product.Application.Features.Products.Queries.GetAllProducts
 
         public async Task<List<GetAllProductsDto>> Handle(GetAllProductsQuery request, CancellationToken cancellationToken)
         {
-            var products = await _productRepository.GetAllAsync();
+            var products = new List<Domain.Entities.Product>();
+            if (request.Id != null)
+            {
+                products.Add(await _productRepository.GetByIdAsync((int)request.Id));
+            }
+            else
+            {
+                products.AddRange(await _productRepository.GetAllAsync());
+            }
+
             var dto = _mapper.Map<List<GetAllProductsDto>>(products);
 
             return dto;
