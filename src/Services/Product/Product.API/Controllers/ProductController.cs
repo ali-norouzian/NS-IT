@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using Product.Application.Features.Products.Queries.GetAllProducts;
 using Product.Application.Models;
 using System.Net;
+using Microsoft.AspNetCore.Authorization;
 
 namespace Product.API.Controllers
 {
@@ -12,6 +13,7 @@ namespace Product.API.Controllers
         {
         }
 
+        [AllowAnonymous]
         [HttpGet]
         [ProducesResponseType(typeof(List<GetAllProductsDto>), (int)HttpStatusCode.OK)]
         public async Task<ActionResult> Index()

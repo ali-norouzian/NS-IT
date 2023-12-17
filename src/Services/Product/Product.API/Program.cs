@@ -27,6 +27,6 @@ app.UseAuthorization();
 
 app.MapControllers();
 
-app.MigrateAndSeedDb();
+await app.MigrateAndSeedDb();
 
 app.Run();
