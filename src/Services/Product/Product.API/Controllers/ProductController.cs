@@ -5,6 +5,7 @@ using Product.Application.Models;
 using System.Net;
 using Microsoft.AspNetCore.Authorization;
 using Product.Application.Features.Products.Commands.CreateProduct;
+using Product.Application.Features.Products.Commands.UpdateProduct;
 
 namespace Product.API.Controllers
 {
@@ -55,6 +56,23 @@ namespace Product.API.Controllers
 
             var response = new ResponseMessage(result: new { productId = result });
             return Ok(response);
+        }
+
+        [Authorize]
+        [HttpPut("{id}")]
+        [ProducesResponseType(StatusCodes.Status204NoContent)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        [ProducesResponseType(StatusCodes.Status403Forbidden)]
+        [ProducesDefaultResponseType]
+        public async Task<ActionResult> UpdateOrder([FromRoute] int id, [FromBody] UpdateProductCommand command)
+        {
+            /*  We can use input classes instead of commands in action for masking this 
+               override properties from ui but ... */
+            command.UpdatorUserId = CurrentUserId;
+            command.Id = id;
+            await _mediator.Send(command);
+
+            return NoContent();
         }
     }
 }

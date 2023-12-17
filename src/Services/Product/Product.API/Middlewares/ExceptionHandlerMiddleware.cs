@@ -22,6 +22,14 @@ namespace Product.API.Middlewares
             {
                 await ConfigureResponse(httpContext, HttpStatusCode.BadRequest, ex.Message);
             }
+            catch (NotFoundException exn)
+            {
+                await ConfigureResponse(httpContext, HttpStatusCode.NotFound, exn.Message);
+            }
+            catch (ForbiddenException exf)
+            {
+                await ConfigureResponse(httpContext, HttpStatusCode.Forbidden, exf.Message);
+            }
             //catch (Exception ex)
             //{
             //  //  Log.Error(ex, "There is an error");

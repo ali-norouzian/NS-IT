@@ -1,21 +1,17 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using MediatR;
 
-namespace Product.Application.Features.Products.Commands.CreateProduct
+namespace Product.Application.Features.Products.Commands.UpdateProduct
 {
-    public class CreateProductCommand : IRequest<int>
+    public class UpdateProductCommand : IRequest<Unit>
     {
-        public CreateProductCommand()
-        {
-            ProduceDate = DateTime.UtcNow;
-        }
+        [Required]
+        public int Id { get; set; }
 
         [Required]
         [MinLength(3)]
         [MaxLength(100)]
         public string Name { get; set; }
-
-        public DateTime ProduceDate { get; private set; }
 
         [Required]
         [MinLength(5)]
@@ -32,7 +28,6 @@ namespace Product.Application.Features.Products.Commands.CreateProduct
         [Required]
         public bool IsAvailable { get; set; }
 
-
-        public int? CreatorUserId { get; set; }
+        public int? UpdatorUserId { get; set; }
     }
 }

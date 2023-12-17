@@ -3,10 +3,11 @@ using MediatR;
 using Microsoft.EntityFrameworkCore;
 using Product.Application.Contracts.Persistence;
 using Product.Application.Exceptions;
+using Product.Application.Features.Products.Commands.CreateProduct;
 
-namespace Product.Application.Features.Products.Commands.CreateProduct
+namespace Product.Application.Features.Products.Commands.UpdateProduct
 {
-    public class UpdateProductCommandHandler : IRequestHandler<CreateProductCommand, int>
+    public class UpdateProductCommandHandler : IRequestHandler<UpdateProductCommand, Unit>
     {
         private readonly IProductRepository _productRepository;
         private readonly IMapper _mapper;
@@ -17,13 +18,20 @@ namespace Product.Application.Features.Products.Commands.CreateProduct
             _mapper = mapper;
         }
 
-        public async Task<int> Handle(CreateProductCommand request, CancellationToken cancellationToken)
+        public async Task<Unit> Handle(UpdateProductCommand request, CancellationToken cancellationToken)
         {
-            var entity = _mapper.Map<Domain.Entities.Product>(request);
-            Domain.Entities.Product? newEntity = null;
+            var entityToUpdate = await _productRepository.GetByIdAsync(request.Id);
+            if (entityToUpdate == null)
+                throw new NotFoundException("Product not found");
+            if (request.UpdatorUserId != entityToUpdate.CreatorUserId)
+                throw new ForbiddenException("This product is not yours!");
+
+
+            _mapper.Map(request, entityToUpdate, typeof(UpdateProductCommand), typeof(Domain.Entities.Product));
+
             try
             {
-                newEntity = await _productRepository.AddAsync(entity);
+                await _productRepository.UpdateAsync(entityToUpdate);
             }
             catch (DbUpdateException e)
             {
@@ -33,7 +41,7 @@ namespace Product.Application.Features.Products.Commands.CreateProduct
                     throw new BusinessLogicException("ProduceDate can't be duplicated");
             }
 
-            return newEntity.Id;
+            return Unit.Value;
         }
     }
 }
