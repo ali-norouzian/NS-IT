@@ -1,10 +1,13 @@
 using Product.API.Extensions;
+using Product.API.Middlewares;
 using Product.Application;
 using Product.Infrastructure;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
+builder.Services.AddHttpContextAccessor();
+
 builder.Services.AddInfrastructureServices(builder.Configuration);
 builder.Services.AddApplicationServices(builder.Configuration);
 
@@ -24,6 +27,8 @@ if (app.Environment.IsDevelopment())
 
 app.UseAuthorization();
 app.UseAuthorization();
+
+app.UseMiddleware<ExceptionHandlerMiddleware>();
 
 app.MapControllers();
 

@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Product.Application.Exceptions;
 using Product.Application.Features.Services.Auth.Dtos;
 using Product.Domain.Entities;
 
@@ -19,13 +20,13 @@ namespace Product.Application.Features.Services.Auth
         public async Task<UserDto> Login(LoginDto loginDto)
         {
             var user = await _userManager.FindByNameAsync(loginDto.UserName);
-            if (user == null) return null;
+            if (user == null) throw new BusinessLogicException("User not found"); ;
 
             var result = await _userManager.CheckPasswordAsync(user, loginDto.Password);
             if (result)
                 return await CreateUserDtoObjByUser(user);
 
-            return null;
+            throw new BusinessLogicException("Wrong password");
         }
 
         [AllowAnonymous]
@@ -43,6 +44,11 @@ namespace Product.Application.Features.Services.Auth
             if (result.Succeeded)
             {
                 return await CreateUserDtoObjByUser(user);
+            }
+            else
+            {
+                var msg = string.Join(", ", result.Errors.Select(e => e.Description));
+                throw new BusinessLogicException(msg);
             }
 
             return null;
